@@ -6,23 +6,23 @@
 /*   By: lnicolau <lnicolau@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:39:56 by lnicolau          #+#    #+#             */
-/*   Updated: 2024/06/18 21:49:26 by lnicolau         ###   ########.fr       */
+/*   Updated: 2024/06/19 23:50:54 by lnicolau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void check_collectibles(t_game *game, int **visit)
+void	check_collectibles(t_game *game, int **visit)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while(i < game->hgt)
+	while (i < game->hgt)
 	{
 		j = 0;
-		while(j < game->wth)
+		while (j < game->wth)
 		{
 			if (game->map[i][j] == 'C' && visit[i][j] == 1)
 			{
@@ -33,10 +33,11 @@ void check_collectibles(t_game *game, int **visit)
 		i++;
 	}
 }
-int **init_visit(int hgt, int wth)
+
+int	**init_visit(int hgt, int wth)
 {
-	int i;
-	int **visit;
+	int	i;
+	int	**visit;
 
 	i = 0;
 	visit = (int **)malloc(sizeof(int *) * hgt);
@@ -68,24 +69,24 @@ char	*fill(char **map, int rows, int columns)
 
 int	part_floodfill(char	**copymap)
 {
-	int	rows;
-	int	columns;
+	int	r;
+	int	c;
 
-	rows = 0;
-	columns = 0;
-	while (copymap[columns] && copymap[columns][rows] != '\0')
+	r = 0;
+	c = 0;
+	while (copymap[c] && copymap[c][r] != '\0')
 	{
-		rows = 0;
-		while (copymap[columns][rows] != '\n')
+		r = 0;
+		while (copymap[c][r] != '\n')
 		{
-			if (copymap[columns][rows] == 'C' || copymap[columns][rows] == 'E')
+			if (copymap[c][r] == 'C' || copymap[c][r] == 'E')
 			{
 				free_map(copymap);
 				ft_error("Error in map file.");
 			}
-			rows++;
+			r++;
 		}
-		columns++;
+		c++;
 	}
 	free_map(copymap);
 	return (1);

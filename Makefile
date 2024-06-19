@@ -11,6 +11,7 @@ MLX_SRC     =   MLX42
 SRC_FILES   =   main.c \
 				free.c \
 				check_map.c \
+				check_map2.c\
 				utils.c \
 				parsing.c\
 				init_game.c\

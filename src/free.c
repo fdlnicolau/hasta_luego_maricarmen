@@ -12,14 +12,12 @@
 
 #include "../inc/so_long.h"
 
-void free_game(t_game *game) 
+void	free_game(t_game *game)
 {
-	if (game->map) 
-	{
+	if (game->map)
 		free_map(game->map);
-	}
 	ft_clean_image(game);
-	if(game->mlx)
+	if (game->mlx)
 	{
 		mlx_terminate(game->mlx);
 		free(game->mlx);
@@ -27,41 +25,36 @@ void free_game(t_game *game)
 	}
 }
 
-void ft_clean_image(t_game *game)
+void	ft_clean_image(t_game *game)
 {
-    if (game->floor_img)
-    {
-        mlx_delete_image(game->mlx, game->floor_img);
-        game->floor_img = NULL;
-    }
-    if (game->exit_img)
-    {
-        mlx_delete_image(game->mlx, game->exit_img);
-        game->exit_img = NULL;
-    }
-    if (game->player_img)
-    {
-        mlx_delete_image(game->mlx, game->player_img);
-        game->player_img = NULL;
-    }
-    if (game->wall_img)
-    {
-        mlx_delete_image(game->mlx, game->wall_img);
-        game->wall_img = NULL;
-    }
-    if (game->collect_img)
-    {
-        mlx_delete_image(game->mlx, game->collect_img);
-        game->collect_img = NULL;
-    }
-    if (game->str)
-    {
-        mlx_delete_image(game->mlx, game->str);
-        game->str = NULL;
-    }
+	if (game->floor_img)
+	{
+		mlx_delete_image(game->mlx, game->floor_img);
+		game->floor_img = NULL;
+	}
+	if (game->exit_img)
+	{
+		mlx_delete_image(game->mlx, game->exit_img);
+		game->exit_img = NULL;
+	}
+	if (game->p_img)
+	{
+		mlx_delete_image(game->mlx, game->p_img);
+		game->p_img = NULL;
+	}
+	if (game->wall_img)
+	{
+		mlx_delete_image(game->mlx, game->wall_img);
+		game->wall_img = NULL;
+	}
+	if (game->c_img)
+	{
+		mlx_delete_image(game->mlx, game->c_img);
+		game->c_img = NULL;
+	}
 }
 
-void close_window(t_game *game)
+void	close_window(t_game *game)
 {
 	if (game->mlx)
 	{
@@ -70,9 +63,10 @@ void close_window(t_game *game)
 	}
 	exit(0);
 }
-void free_map(char **map)
+
+void	free_map(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -83,10 +77,10 @@ void free_map(char **map)
 	free(map);
 }
 
-void ft_exit_free(int nb_error, t_game *game)
+void	ft_exit_free(int nb_error, t_game *game)
 {
 	if (nb_error == EXTENSION_NO_BER)
-		exit(write(1, "\n[ERROR]La extencion no es \".ber\".\n\n", 37));
+		exit(write(1, "\n[ERROR]No this .ber \".ber\".\n\n", 31));
 	if (nb_error == END_OF_PROGRAM)
 	{
 		while (--game->hgt)
@@ -100,20 +94,4 @@ void ft_exit_free(int nb_error, t_game *game)
 	}
 	if (nb_error == MAP_NOT_CORRECT)
 		exit(write(1, "\n[ERROR]MAP_NOT_CORRECT.\n\n", 27));
-}
-void free_visit_matrix(int **visit, int rows)
-{
-    if (visit == NULL)
-        return;
-
-    for (int i = 0; i < rows; ++i)
-    {
-        if (visit[i] != NULL)
-        {
-            free(visit[i]);
-            visit[i] = NULL;  // Opcional: asignar NULL después de liberar la memoria por precaución
-        }
-    }
-
-    free(visit);
 }

@@ -57,19 +57,14 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_itoa(int n);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strrchr(const char *s, int c);
-
-
-int	ft_printf(const char *format, ...);
-int	ft_putchar(char c);
-int	ft_putnbr_he(unsigned int nbr);
-int	ft_putnbr_x(unsigned long nbr);
-int	ft_putnbr(int n);
-int	ft_putstr(char *s);
-int	ft_putnbr_unsigned(unsigned int n);
-int	ft_p(void *p);
-
-
-//get_next_line
+int		ft_printf(const char *format, ...);
+int		ft_putchar(char c);
+int		ft_putnbr_he(unsigned int nbr);
+int		ft_putnbr_x(unsigned long nbr);
+int		ft_putnbr(int n);
+int		ft_putstr(char *s);
+int		ft_putnbr_unsigned(unsigned int n);
+int		ft_p(void *p);
 char	*gnl_strjoin(char *s1, char *s2);
 char	*duplicate_string(char *s1);
 char	*update_and_extract_next_line(char *static_s);
