@@ -98,5 +98,4 @@ void	game_init2(t_game *game)
 	game->player_ps[0] = 0;
 	game->player_ps[1] = 0;
 	game->mlx = NULL;
-	game->window = NULL;
 }

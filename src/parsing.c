@@ -14,6 +14,7 @@
 
 void	parsing(t_game *game, char *argv)
 {
+	char	**new_map;
 	char	**visit;
 	int		i;
 	int		j;
@@ -24,26 +25,26 @@ void	parsing(t_game *game, char *argv)
 	(void)argv;
 	visit = NULL;
 	check_components(game);
-	visit = malloc(game->hgt * sizeof(char *));
-	if (visit == NULL)
-		ft_error("Error in valid malloc");
 	check_walls(game, i, j);
-	visit = duplicate_map(game, game->map);
+	new_map = malloc(game->hgt * sizeof(char *));
+	if(new_map != NULL)
+		visit = duplicate_map(game, game->map, new_map);
+	if(visit == NULL)
+		ft_error("Error duplicating map");
 	flood_fill(game);
 	check_collectibles(game, (int **)visit);
+	free(visit);
 }
 
-char	**duplicate_map(t_game *game, char **original_map)
+char	**duplicate_map(t_game *game, char **original_map, char **new_map)
 {
 	int		i;
-	char	**new_map;
 	int		j;
 
-	new_map = original_map;
 	i = 0;
 	while (i < game->hgt)
 	{
-		new_map[i] = malloc(game->wth * sizeof(char));
+		new_map[i] = malloc((game->wth + 1) * sizeof(char));
 		if (new_map[i] == NULL)
 		{
 			j = 0;
@@ -56,6 +57,7 @@ char	**duplicate_map(t_game *game, char **original_map)
 			return (NULL);
 		}
 		memcpy(new_map[i], original_map[i], game->wth);
+		new_map[i][game->wth] = '\0';
 		i++;
 	}
 	return (new_map);

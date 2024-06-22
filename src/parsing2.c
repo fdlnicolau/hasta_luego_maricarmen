@@ -6,7 +6,7 @@
 /*   By: lnicolau <lnicolau@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:39:56 by lnicolau          #+#    #+#             */
-/*   Updated: 2024/06/19 23:50:54 by lnicolau         ###   ########.fr       */
+/*   Updated: 2024/06/22 16:07:14 by lnicolau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	flood_fill(t_game *game)
 
 	i = 0;
 	pos_player(game);
-	copymap = malloc(sizeof(char *) * game->hgt + 1);
+	copymap = malloc(sizeof(char *) * (game->hgt + 1));
 	while (i < game->hgt)
 	{
 		copymap[i] = ft_strdup(game->map[i]);

@@ -18,10 +18,6 @@ void	init_key_hook(mlx_key_data_t keydata, void *param)
 
 	g = (t_game *) param;
 	ft_where_is(g);
-	if ((g->exit_img->instances[0].y / S == g->p_img->instances->y / S)
-		&& (g->exit_img->instances[0].x / S == g->p_img->instances->x / S)
-		&& (g->exit_img->instances[0].enabled == true) && g->collectibles == 0)
-		ft_exit_free(END_OF_PROGRAM, g);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		ft_exit_free(END_OF_PROGRAM, g);
 	up_down_key(keydata, g);
@@ -34,21 +30,32 @@ void	init_key_hook(mlx_key_data_t keydata, void *param)
 
 void	ft_where_is(t_game *g)
 {
+	if (g->map[g->player_ps[1]][g->player_ps[0]] == 'C')
+		handle_collectible(g);
+	if (g->exit_img->instances[0].y / S == g->p_img->instances->y / S
+		&& g->exit_img->instances[0].x / S == g->p_img->instances->x / S
+		&& g->exit_img->instances[0].enabled == true && g->collectibles == 0)
+		ft_exit_free(END_OF_PROGRAM, g);
+}
+
+void	handle_collectible(t_game *g)
+{
 	int	i;
+
 	if (g->map[g->player_ps[1]][g->player_ps[0]] == 'C')
 	{
 		g->map[g->player_ps[1]][g->player_ps[0]] = 'P';
-		i = -1;
+		i = 0;
 		while (i < g->total_collect)
 		{
-			if ((g->c_img->instances[i].y / S == g->p_img->instances->y / S)
-				&& (g->c_img->instances[i].x / S == g->p_img->instances->x / S)
-				&& (g->c_img->instances[i].enabled == true))
+			if (g->c_img->instances[i].y / S == g->p_img->instances->y / S
+				&& g->c_img->instances[i].x / S == g->p_img->instances->x / S
+				&& g->c_img->instances[i].enabled == true)
 			{
 				g->collectibles--;
 				g->c_img->instances[i].enabled = false;
-				g->map[g->c_img->instances[i].y / S] = 0;
-				g->map[g->c_img->instances[i].x / S] = 0;
+				g->map[g->c_img->instances[i].y / S]
+				[g->c_img->instances[i].x / S] = '0';
 			}
 			i++;
 		}
@@ -104,4 +111,3 @@ void	right_left_key(mlx_key_data_t keydata, t_game *g)
 		}
 	}
 }
-

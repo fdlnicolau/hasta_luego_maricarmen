@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	game_init(&game);
-	if (argc == 2)
+	if (argc == 2 && argv)
 	{
 		check_map(argv[1], &game);
 		game_control(&game);

@@ -61,13 +61,14 @@ typedef struct s_game
 	int					total_collect;
 }	t_game;
 
+void	handle_collectible(t_game *g);
 char	*reading(t_game *game, char *line, int wth, int fd);
 char	*init_reading(int fd, t_game *game);
 void	ft_pain_colect(t_game *g);
 void	pos_player(t_game *g);
 void	free_map(char **map);
 int		flood_fill(t_game *game);
-char	**duplicate_map(t_game *game, char **original_map);
+char	**duplicate_map(t_game *game, char **original_map, char **new_map);
 void	ft_delete(t_game *g);
 void	ft_exit_free(int nb_error, t_game *game);
 void	ft_where_is(t_game *g);
